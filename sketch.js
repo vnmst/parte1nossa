@@ -33,6 +33,7 @@ let videoSources = [];
 let filtamp = 1.2
 let reverb;
 let fundo;
+let transicaoTimerIniciado = false;
 
 let myGlitch;
 let params = {
@@ -110,16 +111,6 @@ smallGlitchCanvasVirtual = createGraphics(width / 4, height / 4);
   filtroLowPass = new p5.LowPass();
 filtroLowPass.freq(freq); // usa sua variável
 filtroLowPass.res(5);
-  
-  setTimeout(() => {
-  cont3 += 1;
-}, 180000);
-  
-    setTimeout(() => {
-  setInterval (() => {
-    min(veloVirtual += 0.009, 5);
-  }, 1000)
-}, 60000);
   
   
   // Coloca todos os vídeos em arrays para facilitar o sorteio
@@ -380,6 +371,19 @@ function mousePressed() {
   
    
   if (sistemaEncerrado) return;  //  ⬅️ BLOQUEIA CLIQUES APÓS ENCERRAR
+
+  if (!transicaoTimerIniciado) {
+  transicaoTimerIniciado = true;
+      setTimeout(() => {
+  cont3 += 1;
+}, 180000);
+  
+    setTimeout(() => {
+  setInterval (() => {
+    min(veloVirtual += 0.009, 5);
+  }, 1000)
+}, 60000);
+  }
 
   let metade = width / 2; 
   
